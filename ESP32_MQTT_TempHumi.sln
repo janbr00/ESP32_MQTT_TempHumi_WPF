@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33414.496
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESP32_MQTT_TempHumi", "ESP32_MQTT_TempHumi.csproj", "{EDF823CF-AC48-4DC4-B282-483B9DEA14A6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDF823CF-AC48-4DC4-B282-483B9DEA14A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDF823CF-AC48-4DC4-B282-483B9DEA14A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDF823CF-AC48-4DC4-B282-483B9DEA14A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDF823CF-AC48-4DC4-B282-483B9DEA14A6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C8EBFBF6-1D43-427E-B31D-66A5D7203E5F}
+	EndGlobalSection
+EndGlobal

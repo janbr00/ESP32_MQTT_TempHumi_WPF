@@ -1,0 +1,125 @@
+﻿<Window x:Class="ESP32_MQTT_TempHumi.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ESP32_MQTT_TempHumi"
+        mc:Ignorable="d"
+        xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+        Title="ESP32 MQTT TempHumi" Background="#3c5483" Height="450" Width="800">
+
+    <Window.DataContext>
+        <local:MainViewModel />
+    </Window.DataContext>
+
+    <Window.Icon>
+        <ImageSource>C:\Users\janbr\OneDrive - Meisterschule für Handwerker\Bilder\daslogo.ico</ImageSource>
+    </Window.Icon>
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#FF6CA6C1" Offset="0" />
+                <GradientStop Color="#FF345C70" Offset="1" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Grid.Column="1" Margin="5">
+            <GroupBox.Header>
+                <TextBlock Text="Eingehende Messwerte" />
+            </GroupBox.Header>
+            <GroupBox.Style>
+                <Style TargetType="GroupBox">
+                    <Setter Property="BorderBrush" Value="Black" />
+                    <Setter Property="BorderThickness" Value="1" />
+                </Style>
+            </GroupBox.Style>
+            <!-- Inhalt: MQTT Messwerte -->
+            <ListBox x:Name="messwerteListBox">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding }" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </GroupBox>
+
+        <GroupBox Grid.Column="1" Grid.Row="1" Margin="5">
+            <GroupBox.Header>
+                <TextBlock Text="Dashboard" />
+            </GroupBox.Header>
+            <GroupBox.Style>
+                <Style TargetType="GroupBox">
+                    <Setter Property="BorderBrush" Value="Black" />
+                    <Setter Property="BorderThickness" Value="1" />
+                </Style>
+            </GroupBox.Style>
+            <StackPanel>
+                <Button Content="Heizung Ein/Aus" 
+                        Command="{Binding PublishCommand}" 
+                        Background="Gray"/>
+                <Button Content="Export in .CSV" 
+                        Command="{Binding ExportToCSVCommand}" 
+                        Background="Gray"/>
+                <!-- Weitere Buttons hinzufügen-->
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Grid.Row="0" Margin="5">
+            <GroupBox.Header>
+                <TextBlock Text="Temperatur" />
+            </GroupBox.Header>
+            <GroupBox.Style>
+                <Style TargetType="GroupBox">
+                    <Setter Property="BorderBrush" Value="Black" />
+                    <Setter Property="BorderThickness" Value="1" />
+                </Style>
+            </GroupBox.Style>
+            <lvc:CartesianChart
+              Series="{Binding TempSeries}"
+              XAxes="{Binding XAxes}"
+              YAxes="{Binding YAxesTemperatur}">
+            </lvc:CartesianChart>
+        </GroupBox>
+
+        <GroupBox Grid.Row="1" Margin="5">
+            <GroupBox.Header>
+                <TextBlock Text="Feuchtigkeit" />
+            </GroupBox.Header>
+            <GroupBox.Style>
+                <Style TargetType="GroupBox">
+                    <Setter Property="BorderBrush" Value="Black" />
+                    <Setter Property="BorderThickness" Value="1" />
+                </Style>
+            </GroupBox.Style>
+            <lvc:CartesianChart Grid.Row="1"
+              Series="{Binding HumiSeries}"
+              XAxes="{Binding XAxes}"
+              YAxes="{Binding YAxesFeuchtigkeit}">
+            </lvc:CartesianChart>
+        </GroupBox>
+
+        <DockPanel Grid.Row="2" Grid.ColumnSpan="2">
+            <StatusBar>
+                <StatusBar.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#FF345C70" Offset="0" />
+                        <GradientStop Color="#FF6CA6C1" Offset="1" />
+                    </LinearGradientBrush>
+                </StatusBar.Background>
+                <TextBlock x:Name="AktuellesDatum" Width="100" FontWeight="Bold" />
+            </StatusBar>
+        </DockPanel>
+    </Grid>
+</Window>
